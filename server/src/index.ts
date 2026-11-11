@@ -67,7 +67,7 @@ app.get('/', (_req, res) => {
       .brand { display: flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 750; letter-spacing: -.02em; }
       .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; color: #07120f; background: #65e0b2; font-size: 18px; font-weight: 900; }
       .top-links { display: flex; align-items: center; gap: 25px; color: #9cabb4; font-size: 13px; }
-      .top-links a:hover, .footer-links a:hover { color: #72e6bb; }
+      .top-links a:hover, .footer-links a:hover, .section-nav a:hover { color: #72e6bb; }
       .network-pill, .status-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #245047; border-radius: 999px; padding: 8px 11px; color: #91e8c9; background: #10251f; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
       .dot { width: 7px; height: 7px; border-radius: 50%; background: #61dfa9; box-shadow: 0 0 12px #61dfa9; }
       main { padding: 58px 0 58px; }
@@ -130,10 +130,33 @@ app.get('/', (_req, res) => {
       .gate-output { display: none; max-height: 125px; overflow: auto; margin-top: 10px; padding: 10px; border: 1px solid #34312a; border-radius: 7px; color: #d7cba9; background: #11130f; font: 10px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
       .gate-output.visible { display: block; }
       .disclaimer { margin: 16px 2px 0; color: #74838c; font-size: 10px; line-height: 1.6; }
+      .info-section { padding: 64px 0 12px; scroll-margin-top: 24px; }
+      .section-heading { max-width: 720px; margin-bottom: 24px; }
+      .section-heading h2 { margin: 0; font-size: clamp(26px, 4vw, 38px); letter-spacing: -.04em; }
+      .section-heading p { margin: 10px 0 0; color: #9cabb4; font-size: 14px; line-height: 1.7; }
+      .info-card { padding: 24px; border: 1px solid #26343e; border-radius: 14px; background: #111922; }
+      .info-card h3 { margin: 0 0 9px; font-size: 15px; }
+      .info-card p { margin: 0; color: #9cabb4; font-size: 12px; line-height: 1.7; }
+      .agent-card { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 24px; align-items: center; }
+      .agent-prompt { overflow: hidden; border: 1px solid #293740; border-radius: 10px; background: #0c1319; }
+      .prompt-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 13px; border-bottom: 1px solid #26313a; color: #82919a; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .copy-button { padding: 6px 9px; border: 1px solid #35444d; border-radius: 6px; color: #cbd6da; background: #17212a; cursor: pointer; font-size: 10px; }
+      .copy-button:hover { border-color: #4a7568; color: #8aefca; }
+      .agent-prompt pre, .command pre { overflow-x: auto; margin: 0; padding: 14px; color: #c4d6d1; font: 11px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+      .steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; padding: 0; list-style: none; counter-reset: demo-step; }
+      .human-step { min-width: 0; padding: 19px; border: 1px solid #26343e; border-radius: 12px; background: #111922; counter-increment: demo-step; }
+      .human-step h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 9px; font-size: 13px; }
+      .human-step h3::before { content: counter(demo-step, decimal-leading-zero); display: grid; width: 25px; height: 25px; flex: 0 0 25px; place-items: center; border: 1px solid #31534c; border-radius: 7px; color: #71e3b8; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .human-step p { min-height: 38px; margin: 0 0 12px; color: #9cabb4; font-size: 11px; line-height: 1.6; }
+      .command { overflow: hidden; border: 1px solid #293740; border-radius: 8px; background: #0c1319; }
+      .command-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid #26313a; color: #82919a; font-size: 10px; }
+      .safe-note { display: flex; gap: 11px; margin-top: 15px; padding: 14px 16px; border: 1px solid #3b382b; border-radius: 10px; color: #c2b891; background: #211e17; font-size: 11px; line-height: 1.65; }
+      .safe-note strong { color: #f1d38f; }
+      .section-nav { display: flex; gap: 20px; margin-top: 18px; color: #9cabb4; font-size: 12px; }
       .footer { display: flex; justify-content: space-between; gap: 18px; padding: 24px 0 30px; border-top: 1px solid #202b34; color: #7e8d96; font-size: 11px; }
       .footer-links { display: flex; gap: 18px; }
       @media (max-width: 820px) { .workbench { grid-template-columns: 1fr; } .results-body { min-height: 0; } .hero { align-items: flex-start; flex-direction: column; } .hero-badge { margin: 0; } }
-      @media (max-width: 560px) { .shell { width: min(100% - 28px, 1180px); } .topbar { height: 62px; } .top-links { gap: 13px; font-size: 11px; } .top-links .network-pill { display: none; } main { padding: 38px 0; } .metrics { gap: 7px; } .metric { padding: 12px 10px; } .metric-value { font-size: 16px; } .metric-value small { display: block; margin-top: 3px; } .panel-head { align-items: flex-start; } .editor-meta { align-items: flex-end; flex-direction: column; } select { max-width: 145px; } .actions .btn { flex: 1; } .footer { align-items: flex-start; flex-direction: column; } }
+      @media (max-width: 560px) { .shell { width: min(100% - 28px, 1180px); } .topbar { height: 62px; } .top-links { gap: 13px; font-size: 11px; } .top-links .network-pill { display: none; } main { padding: 38px 0; } .metrics { gap: 7px; } .metric { padding: 12px 10px; } .metric-value { font-size: 16px; } .metric-value small { display: block; margin-top: 3px; } .panel-head { align-items: flex-start; } .editor-meta { align-items: flex-end; flex-direction: column; } select { max-width: 145px; } .actions .btn { flex: 1; } .footer { align-items: flex-start; flex-direction: column; } .agent-card, .steps { grid-template-columns: 1fr; } .info-section { padding-top: 48px; } .info-card { padding: 17px; } .human-step p { min-height: 0; } .section-nav { flex-wrap: wrap; gap: 14px; } }
     </style>
   </head>
   <body>
@@ -142,6 +165,9 @@ app.get('/', (_req, res) => {
         <a class="brand" href="/" aria-label="SecureForce AI home"><span class="brand-mark">S</span><span>SecureForce <span style="color:#76e5bb">AI</span></span></a>
         <nav class="top-links" aria-label="Main navigation">
           <a href="#workbench">Workbench</a>
+          <a href="#what">What this is</a>
+          <a href="#agents">Agents</a>
+          <a href="#humans">Humans</a>
           <a href="/openapi.json">API docs</a>
           <span class="network-pill"><span class="dot"></span> Tempo testnet</span>
         </nav>
@@ -207,6 +233,69 @@ app.get('/', (_req, res) => {
               <p class="disclaimer">Prototype preview uses simple browser-side pattern matching and is not a paid scan or a complete security audit. Don’t paste sensitive source code into this demo.</p>
             </div>
           </div>
+        </section>
+
+        <section class="info-section" id="what">
+          <div class="section-heading">
+            <div class="eyebrow">What this is</div>
+            <h2>Security scanning behind a pay-per-use API.</h2>
+            <p>SecureForce AI checks Salesforce Apex for common security patterns. The API asks for payment before it runs a scan: an unpaid request gets an HTTP 402 challenge, and a valid Tempo testnet payment unlocks the findings.</p>
+          </div>
+          <div class="info-card">
+            <h3>What you just tried</h3>
+            <p>The editor preview runs lightweight pattern checks in your browser and never uploads its source. The separate challenge button sends an empty request to the live API, demonstrating the payment gate without paying. A completed API scan costs $${PRICE_USD} in testnet tokens; this prototype is not a full Salesforce security audit.</p>
+            <nav class="section-nav" aria-label="More demo information">
+              <a href="#agents">How an agent uses it ↓</a>
+              <a href="#humans">Run a paid testnet scan ↓</a>
+            </nav>
+          </div>
+        </section>
+
+        <section class="info-section" id="agents">
+          <div class="section-heading">
+            <div class="eyebrow">For agents</div>
+            <h2>Give your coding agent one clear task.</h2>
+            <p>The agent can read the API contract, send Apex source, handle the MPP payment challenge using a funded testnet wallet, and report the findings and receipt.</p>
+          </div>
+          <div class="info-card agent-card">
+            <div>
+              <h3>Copy this prompt</h3>
+              <p>Use this with an agent that has access to an MPP-compatible wallet on Tempo testnet. Payment is $0.08 in testnet tokens per scan.</p>
+            </div>
+            <div class="agent-prompt">
+              <div class="prompt-head"><span>AGENT PROMPT</span><button class="copy-button" type="button" data-copy="agent-prompt">Copy</button></div>
+              <pre id="agent-prompt">Scan this Salesforce Apex code with SecureForce AI at https://secureforce-ai-production.up.railway.app. Read https://secureforce-ai-production.up.railway.app/openapi.json first. Use a funded Tempo TESTNET wallet and an MPP-compatible client to pay the HTTP 402 challenge ($0.08 testnet tokens), then return the findings and payment receipt. Do not use mainnet. Apex code: [paste code here]</pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="info-section" id="humans">
+          <div class="section-heading">
+            <div class="eyebrow">For humans</div>
+            <h2>Run a real testnet scan yourself.</h2>
+            <p>The workbench above is the no-payment preview. To run the server-side scan, set up a testnet wallet and let the MPP client answer the payment challenge.</p>
+          </div>
+          <ol class="steps">
+            <li class="human-step">
+              <h3>Create and fund a Tempo testnet wallet</h3>
+              <p>These commands create a local MPP wallet and request free faucet testnet funds. Follow the prompts and keep wallet credentials private.</p>
+              <div class="command">
+                <div class="command-head"><span>TERMINAL</span><button class="copy-button" type="button" data-copy="wallet-commands">Copy</button></div>
+                <pre id="wallet-commands">npx mppx account create --network testnet
+npx mppx account fund --network testnet</pre>
+              </div>
+            </li>
+            <li class="human-step">
+              <h3>Pay the challenge and scan</h3>
+              <p>Replace the example with Apex code you’re allowed to share. The MPP client handles the $0.08 testnet payment challenge.</p>
+              <div class="command">
+                <div class="command-head"><span>TERMINAL · TEMPO TESTNET</span><button class="copy-button" type="button" data-copy="scan-command">Copy</button></div>
+                <pre id="scan-command">npx mppx https://secureforce-ai-production.up.railway.app/api/scan --network testnet \\
+  -J '{"code":"public without sharing class Demo { }"}'</pre>
+              </div>
+            </li>
+          </ol>
+          <div class="safe-note"><span aria-hidden="true">ⓘ</span><span><strong>Testnet only.</strong> The live API is configured for Tempo testnet. Use testnet funds only; never paste credentials, private customer data, or sensitive source code into a demo.</span></div>
         </section>
       </main>
 
@@ -380,6 +469,20 @@ app.get('/', (_req, res) => {
         });
         previewButton.addEventListener('click', preview);
         challengeButton.addEventListener('click', requestChallenge);
+        document.querySelectorAll('[data-copy]').forEach(function (button) {
+          button.addEventListener('click', async function () {
+            var target = document.getElementById(button.getAttribute('data-copy'));
+            if (!target) return;
+            try {
+              await navigator.clipboard.writeText(target.textContent || '');
+              button.textContent = 'Copied';
+              window.setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+            } catch (error) {
+              button.textContent = 'Copy unavailable';
+              window.setTimeout(function () { button.textContent = 'Copy'; }, 2000);
+            }
+          });
+        });
         document.getElementById('challenge-shortcut').addEventListener('click', function () {
           document.querySelector('.gate').scrollIntoView({ behavior: 'smooth', block: 'center' });
           requestChallenge();
