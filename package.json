@@ -1,0 +1,19 @@
+{
+  "name": "secureforce-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered Salesforce Apex security scanner, paid per scan with the Machine Payments Protocol (MPP).",
+  "type": "module",
+  "workspaces": [
+    "server"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "npm run dev -w server",
+    "build": "npm run build -w server",
+    "start": "npm run start -w server",
+    "typecheck": "npm run typecheck -w server"
+  }
+}
