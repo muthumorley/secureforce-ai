@@ -47,6 +47,63 @@ const app = express();
 app.use(express.json({ limit: '200kb' }));
 
 // ---- free routes -----------------------------------------------------------
+app.get('/', (_req, res) => {
+  res.type('html').send(`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101923">
+    <title>SecureForce AI — Apex security scans</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #101923; color: #edf4f5; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; background: radial-gradient(ellipse at 75% 0%, #173c3b 0, transparent 38%), #101923; }
+      main { width: min(940px, calc(100% - 40px)); margin: 0 auto; padding: 72px 0 64px; }
+      .eyebrow { color: #66e0b2; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+      h1 { max-width: 720px; margin: 18px 0; font-size: clamp(42px, 8vw, 72px); line-height: 1.02; letter-spacing: -.055em; }
+      h1 span { color: #66e0b2; }
+      .intro { max-width: 650px; color: #b7c5ca; font-size: 18px; line-height: 1.7; }
+      .card { margin-top: 40px; padding: 28px; border: 1px solid #2b3d48; border-radius: 16px; background: #15212b; box-shadow: 0 20px 60px #0003; }
+      h2 { margin: 0 0 12px; font-size: 20px; }
+      p { color: #b7c5ca; line-height: 1.65; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      pre { overflow-x: auto; margin: 18px 0 0; padding: 18px; border-radius: 10px; background: #0c141b; color: #d7e8e7; font-size: 13px; line-height: 1.7; }
+      .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+      a { color: #66e0b2; }
+      .links a { padding: 11px 15px; border: 1px solid #3c635c; border-radius: 9px; font-weight: 650; text-decoration: none; }
+      .links a:hover { background: #1b3535; }
+      .note { margin-top: 20px; color: #90a2a9; font-size: 13px; }
+      @media (max-width: 600px) { main { padding-top: 48px; } .card { padding: 20px; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">SecureForce AI · Tempo testnet</div>
+      <h1>Apex security scans, <span>paid per scan.</span></h1>
+      <p class="intro">A demo API that checks Salesforce Apex for common security patterns and charges $${PRICE_USD} per scan using the Machine Payments Protocol (MPP). Testnet only—no real-money payments.</p>
+
+      <section class="card" aria-labelledby="demo-title">
+        <h2 id="demo-title">See the payment gate</h2>
+        <p>Try a scan without payment to see the HTTP 402 MPP challenge. The scan runs only after a valid testnet payment.</p>
+        <pre><code>curl -i -X POST https://secureforce-ai-production.up.railway.app/api/scan \\
+  -H 'content-type: application/json' \\
+  -d '{"code":"public without sharing class Demo { }"}'</code></pre>
+        <p>To complete the testnet payment flow, use an MPP-compatible client with a funded Tempo testnet wallet:</p>
+        <pre><code>npx mppx https://secureforce-ai-production.up.railway.app/api/scan --network testnet \\
+  -J '{"code":"public without sharing class Demo { }"}'</code></pre>
+        <div class="links">
+          <a href="/health">Service health</a>
+          <a href="/llms.txt">API usage</a>
+          <a href="/openapi.json">OpenAPI</a>
+        </div>
+        <p class="note">Prototype scanner: pattern-based demonstration, not a complete security audit. Don’t submit sensitive source code.</p>
+      </section>
+    </main>
+  </body>
+</html>`);
+});
+
 app.get('/health', (_req, res) => {
   res.json({ ok: true, service: 'secureforce-ai', priceUsdPerScan: PRICE_USD, network: 'tempo-testnet' });
 });
