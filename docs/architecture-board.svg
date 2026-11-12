@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1000" viewBox="0 0 1500 1000" role="img" aria-labelledby="title description">
+  <title id="title">SecureForce AI architecture and scan flow</title>
+  <desc id="description">A classroom chalkboard drawing showing a client, an MPP payment gate, and an Apex rule scanner. Unpaid requests receive an HTTP 402 challenge and are not scanned. After payment on Tempo testnet, a verified retry runs the scanner and returns findings with a receipt.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1 1L11 6L1 11" fill="none" stroke="#f4f0dc" stroke-width="2"/>
+    </marker>
+    <filter id="chalk" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="12" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1"/>
+    </filter>
+    <style>
+      .chalk { fill: #f4f0dc; font-family: "Trebuchet MS", "Comic Sans MS", sans-serif; }
+      .muted { fill: #cfdbc8; font-family: "Trebuchet MS", "Comic Sans MS", sans-serif; }
+      .line { fill: none; stroke: #f4f0dc; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #cfdbc8; stroke-width: 3; stroke-dasharray: 9 10; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="1500" height="1000" fill="#754d32"/>
+  <rect x="22" y="22" width="1456" height="928" rx="8" fill="#173c35" stroke="#c49a68" stroke-width="8"/>
+  <rect x="38" y="38" width="1424" height="896" rx="3" fill="none" stroke="#a9c1a8" stroke-width="2" opacity=".55"/>
+
+  <g filter="url(#chalk)">
+    <text class="chalk" x="750" y="98" text-anchor="middle" font-size="46" font-weight="700">SECUREFORCE AI — HOW A SCAN WORKS</text>
+    <path class="line" d="M270 124 Q750 132 1230 124" stroke-width="3"/>
+    <text class="muted" x="750" y="163" text-anchor="middle" font-size="23">A little chalkboard lesson in an API scan and its testnet payment</text>
+
+    <!-- Main architecture blocks -->
+    <rect x="76" y="222" width="390" height="270" rx="18" fill="#214b42" stroke="#f4f0dc" stroke-width="4"/>
+    <circle cx="119" cy="266" r="23" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <path class="line" d="M108 266h22M119 255v22" stroke-width="3"/>
+    <text class="chalk" x="155" y="275" font-size="29" font-weight="700">CLIENT</text>
+    <path class="dash" d="M102 302h338"/>
+    <text class="muted" x="110" y="345" font-size="23">Browser demo or API client</text>
+    <text class="chalk" x="110" y="389" font-size="21">Browser preview stays local</text>
+    <text class="chalk" x="110" y="429" font-size="21">Paid scan sends Apex to</text>
+    <text class="chalk" x="110" y="460" font-size="21">POST /api/scan</text>
+
+    <rect x="555" y="222" width="390" height="270" rx="18" fill="#214b42" stroke="#f4f0dc" stroke-width="4"/>
+    <path class="line" d="M592 251h44v42h-44zM600 262h28M600 273h28M600 284h19" stroke-width="3"/>
+    <text class="chalk" x="655" y="275" font-size="29" font-weight="700">PAYMENT GATE</text>
+    <path class="dash" d="M581 302h338"/>
+    <text class="chalk" x="590" y="345" font-size="22">Express + MPP middleware</text>
+    <text class="muted" x="590" y="389" font-size="21">Unpaid → HTTP 402 challenge</text>
+    <text class="muted" x="590" y="429" font-size="21">Paid retry → validate + verify</text>
+    <text class="muted" x="590" y="469" font-size="21">Replay protection for payments</text>
+
+    <rect x="1034" y="222" width="390" height="270" rx="18" fill="#214b42" stroke="#f4f0dc" stroke-width="4"/>
+    <path class="line" d="M1072 260h45M1072 276h32M1072 292h48" stroke-width="4"/>
+    <circle cx="1128" cy="260" r="6" fill="#f4f0dc"/>
+    <circle cx="1115" cy="276" r="6" fill="#f4f0dc"/>
+    <circle cx="1132" cy="292" r="6" fill="#f4f0dc"/>
+    <text class="chalk" x="1151" y="275" font-size="29" font-weight="700">APEX SCANNER</text>
+    <path class="dash" d="M1060 302h338"/>
+    <text class="chalk" x="1070" y="345" font-size="22">Runs only after payment</text>
+    <text class="muted" x="1070" y="389" font-size="21">9 simple line-based rules</text>
+    <text class="muted" x="1070" y="429" font-size="21">Findings: rule, severity, line</text>
+    <text class="muted" x="1070" y="469" font-size="21">JSON response + receipt</text>
+
+    <!-- Request and response arrows -->
+    <path class="line" d="M466 320h82" marker-end="url(#arrow)"/>
+    <text class="chalk" x="507" y="300" text-anchor="middle" font-size="17">request</text>
+    <path class="line" d="M945 320h82" marker-end="url(#arrow)"/>
+    <text class="chalk" x="986" y="300" text-anchor="middle" font-size="17">verified</text>
+
+    <!-- Chalk lesson: request cycle -->
+    <text class="chalk" x="750" y="552" text-anchor="middle" font-size="30" font-weight="700">THE REQUEST CYCLE</text>
+    <path class="dash" d="M470 566h560"/>
+
+    <path class="line" d="M290 652h194" marker-end="url(#arrow)"/>
+    <path class="line" d="M566 652h200" marker-end="url(#arrow)"/>
+    <path class="line" d="M866 652h192" marker-end="url(#arrow)"/>
+    <path class="line" d="M1124 652h198" marker-end="url(#arrow)"/>
+
+    <circle cx="112" cy="652" r="29" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <text class="chalk" x="112" y="661" text-anchor="middle" font-size="24" font-weight="700">1</text>
+    <text class="chalk" x="112" y="710" font-size="20">Send Apex</text>
+    <text class="muted" x="112" y="740" font-size="18">POST /api/scan</text>
+
+    <circle cx="518" cy="652" r="29" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <text class="chalk" x="518" y="661" text-anchor="middle" font-size="24" font-weight="700">2</text>
+    <text class="chalk" x="518" y="710" text-anchor="middle" font-size="20">No payment?</text>
+    <text class="muted" x="518" y="740" text-anchor="middle" font-size="18">402 challenge; no scan</text>
+
+    <circle cx="800" cy="652" r="29" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <text class="chalk" x="800" y="661" text-anchor="middle" font-size="24" font-weight="700">3</text>
+    <text class="chalk" x="800" y="710" text-anchor="middle" font-size="20">Pay + retry</text>
+    <text class="muted" x="800" y="740" text-anchor="middle" font-size="18">Tempo testnet wallet</text>
+
+    <circle cx="1095" cy="652" r="29" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <text class="chalk" x="1095" y="661" text-anchor="middle" font-size="24" font-weight="700">4</text>
+    <text class="chalk" x="1095" y="710" text-anchor="middle" font-size="20">Verify + scan</text>
+    <text class="muted" x="1095" y="740" text-anchor="middle" font-size="18">Rules run after payment</text>
+
+    <circle cx="1360" cy="652" r="29" fill="none" stroke="#f4f0dc" stroke-width="3"/>
+    <text class="chalk" x="1360" y="661" text-anchor="middle" font-size="24" font-weight="700">5</text>
+    <text class="chalk" x="1360" y="710" text-anchor="middle" font-size="20">Findings</text>
+    <text class="muted" x="1360" y="740" text-anchor="middle" font-size="18">JSON + receipt</text>
+
+    <!-- Important distinction -->
+    <rect x="76" y="798" width="1348" height="88" rx="14" fill="#173c35" stroke="#d7cc8e" stroke-width="3"/>
+    <text class="chalk" x="110" y="834" font-size="21" font-weight="700">REMEMBER</text>
+    <text class="muted" x="110" y="866" font-size="20">The homepage preview is browser-local. The paid API scan is server-side; code is not scanned until payment verifies.</text>
+  </g>
+
+  <rect x="610" y="950" width="280" height="16" rx="7" fill="#c49a68"/>
+</svg>
